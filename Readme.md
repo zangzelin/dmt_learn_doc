@@ -45,7 +45,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<img src="dems.png" alt="image-20230727171351699" style="zoom:67%;" />
+<img src="img/dems.jpg" alt="image-20230727171351699" style="zoom:67%;" />
 
 
 #### Convert Images to Flattened NumPy Arrays and Extract Labels
@@ -84,4 +84,4 @@ plt.scatter(vis_data[:, 0], vis_data[:, 1], marker='.', c=LABEL, cmap='tab10', s
 plt.colorbar()
 plt.show()
 ```
-<img src="res1.png" alt="image-20230727171351699" style="zoom:67%;" />
+<img src="img/vis_data.jpg" alt="image-20230727171351699" style="zoom:67%;" />
