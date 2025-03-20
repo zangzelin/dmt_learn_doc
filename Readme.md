@@ -1,5 +1,5 @@
 
-## How to install DMT-EV
+## How to install DMT-HI
 
 To install the corresponding environment, you can follow the steps below.
 
