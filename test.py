@@ -45,7 +45,7 @@ print(f"DATA.shape: {DATA.shape}")  # output: (60000, 784)
 dmt = DMTLearn(
     random_state=0,  # Set a random seed for reproducibility
     max_epochs=100,  # Number of training epochs
-    nu=1.5,
+    nu=0.8,
     temp=2.0,
 )
 
