@@ -45,7 +45,7 @@ print(f"DATA.shape: {DATA.shape}")  # output: (60000, 784)
 dmt = DMTLearn(
     random_state=0,  # Set a random seed for reproducibility
     max_epochs=500,  # Number of training epochs
-    temp=2,
+    temp=1,
 )
 
 # Fit the model and transform the dataset into a lower-dimensional space
