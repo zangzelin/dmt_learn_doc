@@ -46,6 +46,7 @@ dmt = DMTLearn(
     random_state=0,  # Set a random seed for reproducibility
     max_epochs=100,  # Number of training epochs
     nu=1.5,
+    temp=2.0,
 )
 
 # Fit the model and transform the dataset into a lower-dimensional space
