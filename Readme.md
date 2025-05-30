@@ -94,7 +94,7 @@ print(f"DATA.shape: {DATA.shape}")  # output: (60000, 784)
 # Initialize the DMT-EV model
 dmt = DMTLearn(
     random_state=0,  # Set a random seed for reproducibility
-    max_epochs=4,     # Number of training epochs
+    max_epochs=400,     # Number of training epochs
 )
 
 # Fit the model and transform the dataset into a lower-dimensional space
