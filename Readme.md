@@ -22,7 +22,7 @@ conda install pytorch torchvision torchaudio pytorch-cuda=12.3 -c pytorch -c nvi
 #### Step 3: Additional Dependencies
 There are other dependencies specified in the install_env.sh script, you can install them using the following command. Make sure that `install_env.sh` is available in your directory.
 ```bash
-bash install_env.sh
+pip install dmt_learn -U
 ```
 
 ## How to Use DMT-EV
