@@ -44,7 +44,7 @@ def main():
     # 初始化并训练 DMT 模型
     dmt = DMTLearn(
         random_state=0,
-        max_epochs=100,
+        max_epochs=400,
         temp=1,
     )
 
