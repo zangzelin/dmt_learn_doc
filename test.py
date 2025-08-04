@@ -47,7 +47,8 @@ def main():
         max_epochs=300,
         temp=1,
         nu=0.002,
-        loss_type='L',
+        loss_type='G',
+        n_neighbors=10,
     )
 
     vis_data = dmt.fit_transform(DATA)
