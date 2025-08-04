@@ -1,3 +1,12 @@
+"""
+使用 DMTLearn 模型对 MNIST 数据集进行降维可视化
+- 数据预处理与加载
+- 可视化图像保存
+- DMT 模型训练与降维
+- 结果保存与绘图
+"""
+
+# ===== 导入依赖 =====
 import torch
 import numpy as np
 from dmt_learn import DMTLearn
@@ -7,8 +16,20 @@ from torchvision.datasets import MNIST
 from torch.utils.data import DataLoader
 import os
 
+# ===== 工具函数 =====
+def flatten_mnist_data(dataset):
+    """
+    将MNIST数据集中的图像展平为向量，并提取标签。
+    """
+    data_list, label_list = [], []
+    for img, label in dataset:
+        data_list.append(img.numpy().squeeze())
+        label_list.append(label)
+    return np.stack(data_list).reshape((-1, 784)), np.array(label_list)
+
+# ===== 主流程函数 =====
 def main():
-    # 设置数据预处理
+    # 设置精度模式
     torch.set_float32_matmul_precision('medium')
     transform = transforms.Compose([transforms.ToTensor()])
 
@@ -29,38 +50,32 @@ def main():
     plt.savefig('output_images/mnist_images.png', dpi=300)
     plt.close()
 
-    # 将图像展平为784维向量
-    data_list = []
-    label_list = []
-    for i in range(len(train_data)):
-        img_array = train_data[i][0].numpy().squeeze()
-        data_list.append(img_array)
-        label_list.append(train_data[i][1])
-    DATA = np.stack(data_list).reshape((-1, 784))
-    LABEL = np.array(label_list)
-
+    # 图像展平为向量
+    DATA, LABEL = flatten_mnist_data(train_data)
     print(f"DATA.shape: {DATA.shape}")
 
-    # 初始化并训练 DMT 模型
+    # 初始化并训练模型
     dmt = DMTLearn(
         random_state=0,
-        max_epochs=300,
+        max_epochs=200,
         temp=1,
         nu=0.002,
         loss_type='G',
-        n_neighbors=10,
+        n_neighbors=3,
     )
 
+    # 使用 DMT 模型进行降维
     vis_data = dmt.fit_transform(DATA)
     print(f"vis_data.shape: {vis_data.shape}")
 
-    # 保存降维结果
+    # 绘制并保存可视化结果
     plt.figure(figsize=(10, 8))
     plt.scatter(vis_data[:, 0], vis_data[:, 1], marker='.', c=LABEL, cmap='tab10', s=0.5)
     plt.colorbar()
     plt.savefig('output_images/dimensionality_reduction.png', dpi=300)
     plt.close()
 
+# ===== 脚本运行入口 =====
 if __name__ == '__main__':
     import multiprocessing
     multiprocessing.set_start_method('spawn', force=True)  # 强制使用 spawn，适配 Mac 和 Lightning
