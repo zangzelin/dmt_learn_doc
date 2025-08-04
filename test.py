@@ -44,9 +44,10 @@ def main():
     # 初始化并训练 DMT 模型
     dmt = DMTLearn(
         random_state=0,
-        max_epochs=1000,
+        max_epochs=300,
         temp=1,
-        loss_type='G'
+        nu=0.002,
+        loss_type='L',
     )
 
     vis_data = dmt.fit_transform(DATA)
