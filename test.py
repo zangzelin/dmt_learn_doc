@@ -57,10 +57,10 @@ def main():
     # 初始化并训练模型
     dmt = DMTLearn(
         random_state=0,
-        max_epochs=200,
+        max_epochs=100,
         temp=1,
         nu=0.002,
-        loss_type='G',
+        loss_type='A',
         n_neighbors=3,
     )
 
