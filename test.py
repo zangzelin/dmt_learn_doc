@@ -62,6 +62,7 @@ def main():
         nu=0.002,
         loss_type='A',
         n_neighbors=3,
+        all_g_l_weight=0.5,
     )
 
     # 使用 DMT 模型进行降维
