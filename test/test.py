@@ -33,26 +33,23 @@ def main(all_g_l_weight=0.5):
     torch.set_float32_matmul_precision('medium')
     transform = transforms.Compose([transforms.ToTensor()])
 
-    # 加载 MNIST 数据集
-    train_data = MNIST(root='data', train=True, download=True, transform=transform)
+    path = 'data/E9.5_E1S1.MOSTA.h5ad'
+    
+    import scanpy as sc
+    adata = sc.read_h5ad(path)
+    
+    data = adata.X.toarray()
+    high_var_genes_500 = np.var(data, axis=0).argsort()[-500:]
+    data = data[:, high_var_genes_500]
+    
+    LABEL_list_str = list(adata.obs['annotation'].values)
+    laebl_set = list(set(LABEL_list_str))
+    laebl_set.sort()
+    LABEL_list = [laebl_set.index(label) for label in LABEL_list_str]
+    
+    DATA = data
+    LABEL = np.array(LABEL_list)
 
-    # 使用 DataLoader 增加数据加载效率
-    train_loader = DataLoader(train_data, batch_size=64, shuffle=True, num_workers=48, pin_memory=True)
-
-    # 显示并保存前40张图像
-    os.makedirs('output_images', exist_ok=True)
-    fig, axes = plt.subplots(5, 8, figsize=(10, 6), facecolor='white')
-    for i, ax in enumerate(axes.flat):
-        ax.imshow(train_data[i][0].numpy().squeeze(), cmap='gray_r')
-        ax.set_title(f"Label: {train_data[i][1]}", color='black')
-        ax.axis('off')
-    plt.tight_layout()
-    plt.savefig('output_images/mnist_images.png', dpi=300)
-    plt.close()
-
-    # 图像展平为向量
-    DATA, LABEL = flatten_mnist_data(train_data)
-    print(f"DATA.shape: {DATA.shape}")
 
     # 初始化并训练模型
     dmt = DMTLearn(
@@ -71,7 +68,7 @@ def main(all_g_l_weight=0.5):
 
     # 绘制并保存可视化结果
     plt.figure(figsize=(10, 8))
-    plt.scatter(vis_data[:, 0], vis_data[:, 1], marker='.', c=LABEL, cmap='tab10', s=0.5)
+    plt.scatter(vis_data[:, 0], vis_data[:, 1], marker='.', c=LABEL, cmap='tab20', s=0.5)
     plt.colorbar()
     plt.savefig(f'output_images/dimensionality_reduction{all_g_l_weight}.png', dpi=300)
     plt.close()
