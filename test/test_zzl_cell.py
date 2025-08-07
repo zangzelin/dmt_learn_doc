@@ -28,7 +28,7 @@ def flatten_mnist_data(dataset):
     return np.stack(data_list).reshape((-1, 784)), np.array(label_list)
 
 # ===== 主流程函数 =====
-def main(all_g_l_weight=0.8):
+def main(all_g_l_weight=0.5):
     # 设置精度模式
     torch.set_float32_matmul_precision('medium')
     transform = transforms.Compose([transforms.ToTensor()])
@@ -80,4 +80,13 @@ def main(all_g_l_weight=0.8):
 if __name__ == '__main__':
     import multiprocessing
     multiprocessing.set_start_method('spawn', force=True)  # 强制使用 spawn，适配 Mac 和 Lightning
-    main()
+    main(all_g_l_weight=0.1)
+    main(all_g_l_weight=0.2)
+    main(all_g_l_weight=0.3)
+    main(all_g_l_weight=0.4)
+    main(all_g_l_weight=0.5)
+    main(all_g_l_weight=0.6)
+    main(all_g_l_weight=0.7)
+    main(all_g_l_weight=0.8)
+    main(all_g_l_weight=0.9)
+    main(all_g_l_weight=1.0)
