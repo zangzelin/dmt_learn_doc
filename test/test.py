@@ -58,13 +58,15 @@ def main(all_g_l_weight=0.5):
         temp=1,
         nu=0.002,
         loss_type='A',
-        n_neighbors=3,
+        n_neighbors=30,
+        dim_high=512,
         all_g_l_weight=all_g_l_weight,
     )
 
     # 使用 DMT 模型进行降维
-    vis_data = dmt.fit_transform(DATA)
+    vis_data, high_emb = dmt.fit_transform(DATA, return_high_dim=True)
     print(f"vis_data.shape: {vis_data.shape}")
+    print(f"high_emb.shape: {high_emb.shape}")
 
     # 绘制并保存可视化结果
     plt.figure(figsize=(10, 8))
@@ -78,12 +80,12 @@ if __name__ == '__main__':
     import multiprocessing
     multiprocessing.set_start_method('spawn', force=True)  # 强制使用 spawn，适配 Mac 和 Lightning
     main(all_g_l_weight=0.1)
-    main(all_g_l_weight=0.2)
-    main(all_g_l_weight=0.3)
-    main(all_g_l_weight=0.4)
-    main(all_g_l_weight=0.5)
-    main(all_g_l_weight=0.6)
-    main(all_g_l_weight=0.7)
-    main(all_g_l_weight=0.8)
-    main(all_g_l_weight=0.9)
-    main(all_g_l_weight=1.0)
+    # main(all_g_l_weight=0.2)
+    # main(all_g_l_weight=0.3)
+    # main(all_g_l_weight=0.4)
+    # main(all_g_l_weight=0.5)
+    # main(all_g_l_weight=0.6)
+    # main(all_g_l_weight=0.7)
+    # main(all_g_l_weight=0.8)
+    # main(all_g_l_weight=0.9)
+    # main(all_g_l_weight=1.0)

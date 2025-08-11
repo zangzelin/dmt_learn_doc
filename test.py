@@ -63,6 +63,7 @@ def main(all_g_l_weight=0.8):
         loss_type='A',
         n_neighbors=3,
         all_g_l_weight=all_g_l_weight,
+        save_ckpt_path='ckpt/ckpt_mnist.pth',
     )
 
     # 使用 DMT 模型进行降维
