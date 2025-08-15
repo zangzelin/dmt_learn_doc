@@ -1,2 +1,3 @@
 data/*
 output_images/mnist_images.png
+ckpt/

@@ -67,7 +67,8 @@ def main(all_g_l_weight=0.8):
     )
 
     # 使用 DMT 模型进行降维
-    vis_data = dmt.fit_transform(DATA)
+    vis_data = dmt.ckpt_transform(DATA, ckpt='ckpt/ckpt_mnist.pth.ckpt')
+
     print(f"vis_data.shape: {vis_data.shape}")
 
     # 绘制并保存可视化结果
